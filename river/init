@@ -1,0 +1,101 @@
+#bin/bash
+export XDG_CURRENT_DESKTOP=river
+
+dbus-update-activation-environment --systemd
+
+wlr-randr --output DP-1 --mode 1920x1080@119.878998 &
+
+riverctl rule-add ssd
+riverctl default-layout wideriver
+riverctl attach-mode bottom
+wideriver \
+    --layout                       left        \
+    --layout-alt                   monocle     \
+    --stack                        dwindle     \
+    --count-master                 1           \
+    --ratio-master                 0.50        \
+    --count-wide-left              0           \
+    --ratio-wide                   0.35        \
+    --no-smart-gaps                            \
+    --inner-gaps                   5           \
+    --outer-gaps                   10           \
+    --border-width                 2           \
+    --border-width-monocle         0           \
+    --border-width-smart-gaps      0           \
+    --border-color-focused         "0x54263d"  \
+    --border-color-focused-monocle "0x262626"  \
+    --border-color-unfocused       "0x262626"  \
+    --log-threshold                info        \
+   > "/tmp/wideriver.${XDG_VTNR}.${USER}.log" 2>&1 &
+
+# input
+riverctl input pointer-13652-62723-Compx_VGN_Mouse_2.4G_Receiver accel-profile flat
+riverctl input pointer-13652-62723-Compx_VGN_Mouse_2.4G_Receiver pointer-accel 0
+riverctl xcursor-theme Afterglow-Recolored-Dracula-Pink
+riverctl keyboard-layout -options "grp:sclk_toggle" us,ru
+riverctl focus-follows-cursor always
+riverctl set-repeat 35 250
+
+# startup
+riverctl spawn 'AmneziaVPN --connect 0'
+riverctl spawn 'Telegram'
+riverctl spawn 'wl-clip-persist -c regular'
+riverctl spawn 'foot --server'
+riverctl spawn 'swaybg -i ~/Wallpapers/1.jpg'
+riverctl spawn 'hypridle'
+riverctl spawn 'equibop'
+riverctl spawn 'waybar'
+
+# binds
+mod="Super"
+
+# window
+riverctl map normal "$mod" Q close
+riverctl map normal "$mod" F toggle-fullscreen
+riverctl map normal "$mod" V toggle-float
+
+# focus
+riverctl map normal "$mod" H focus-view left
+riverctl map normal "$mod" J focus-view down
+riverctl map normal "$mod" K focus-view up
+riverctl map normal "$mod" L focus-view right
+
+# swap
+riverctl map normal "$mod+Shift" H swap left
+riverctl map normal "$mod+Shift" J swap down
+riverctl map normal "$mod+Shift" K swap up
+riverctl map normal "$mod+Shift" L swap right
+
+# mouse
+riverctl map-pointer normal "$mod" BTN_LEFT move-view
+riverctl map-pointer normal "$mod" BTN_RIGHT rezise-view
+
+# tags
+i=1
+while [ "$i" -le 9 ]; do
+    tags=$(( 1 << (i -1) ))
+    riverctl map normal "$mod" "$i" set-focused-tags "$tags"
+    riverctl map normal "$mod+Shift" "$i" set-view-tags "$tags"
+    i=$(( i + 1 ))
+done
+all_tags=$(( (1 << 32) - 1 ))
+riverctl map normal "$mod" 0 spawn 'river-sticky'
+riverctl map normal "$mod+Shift" 0 set-view-tags "$all_tags"
+special_tag=$((1 << 20))
+riverctl map normal "$mod" S spawn ~/.config/river/scratchpad.sh
+
+# apps
+riverctl map normal "$mod" Return spawn 'footclient'
+riverctl map normal "$mod" W spawn 'vivaldi'
+riverctl map normal None F24 spawn "pkill fuzzel || fuzzel" # Super
+
+# rules
+riverctl rule-add -app-id "org.telegram.desktop" tags $special_tag
+riverctl rule-add -app-id "org.telegram.desktop" float
+riverctl rule-add -app-id "org.telegram.desktop" dimensions 1824 980
+riverctl rule-add -app-id "org.telegram.desktop" position 48 62
+riverctl rule-add -app-id "equibop" tags 4
+
+riverctl rule-add -app-id "org.pulseaudio.pavucontrol" float
+riverctl rule-add -app-id "org.pulseaudio.pavucontrol" position 1700 30
+riverctl rule-add -app-id "org.pulseaudio.pavucontrol" csd # no border

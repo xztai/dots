@@ -1,0 +1,135 @@
+/* ── Waybar base ───────────────────────────────────────────── */
+* {
+    font-family: "JetBrainsMono Nerd Font Propo", monospace;
+    font-size: 11px;
+    border: none;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: #161616;
+    color: #b4f9f8;
+}
+
+window#waybar > box {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+/* ── Tooltip ───────────────────────────────────────────────── */
+tooltip {
+    background-color: #161616;
+    border: 1px solid #ff74b8;
+    color: #c8d3f5;
+}
+
+tooltip label {
+    color: #c8d3f5;
+}
+
+/* ── Separator ─────────────────────────────────────────────── */
+#custom-separator {
+    color: #4a6668;
+    padding: 0.5px 0.5px;
+}
+
+/* ── tags ────────────────────────────────────────────── */
+#tags {
+    background: transparent;
+}
+
+#tags button {
+    background: transparent;
+    color: #d0d0d0; 
+    opacity: 0.75;
+    padding: 5px 6px;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    box-shadow: none;
+    min-width: 0;
+}
+
+#tags button:hover {
+    background: transparent;
+    color: #ff74b8;
+    box-shadow: none;
+}
+
+#tags button.focused {
+    color: #ff74b8;
+    opacity: 1;
+    border-bottom: solid 2px #ff74b8;
+}
+
+/* ── Window title ──────────────────────────────────────────── */
+#window {
+    color: #b4f9f8;
+    padding: 1px 2.5px;
+}
+
+#clock {
+    color: #ffc777;
+    padding: 1px 2.5px;
+}
+
+/* ── CPU ────────────────────────────────────────────────────── */
+#cpu {
+    color: #ff996c;
+    padding: 1px 2.5px;
+}
+
+/* nerdfont icon inherits color — override to orange */
+#cpu label:first-child {
+    color: #ff966c;
+}
+
+/* ── Memory ─────────────────────────────────────────────────── */
+#memory {
+    color: #4fd6be;
+    padding: 1px 2.5px;
+}
+
+/* ── Temperature ────────────────────────────────────────────── */
+#temperature {
+    color: #ff996c;
+    padding: 1px 2.5px;
+}
+
+#temperature.critical {
+    color: #ff757f;
+}
+
+#disk {
+    color: #ff74b8;
+    padding: 1px 2.5px;
+}
+
+/* ── Network ────────────────────────────────────────────────── */
+#network {
+    color: #ff74b8;
+    padding: 1px 2.5px;
+}
+
+#network.disconnected {
+    color: #ffc777;
+}
+
+/* ── Pulseaudio ─────────────────────────────────────────────── */
+#pulseaudio {
+    color: #82aaff;
+    padding: 1px 2.5px;
+}
+
+#pulseaudio.muted {
+  padding: 1px 2.5px;
+  color: #82aaff;
+}
+
+#pulseaudio.microphone {
+  padding: 1px 2.5px;
+  color: #82aaff;
+}
+
+scrollbar {
+    background: transparent;
+}

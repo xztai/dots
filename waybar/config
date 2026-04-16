@@ -1,0 +1,99 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top", // Waybar at top layer
+    "height": 28, // Waybar height (to be removed for auto height)
+    "width": 1920, // Waybar width
+    "spacing": 6, // Gaps between modules (4px)
+
+    "modules-left": [
+        "river/tags",
+        "custom/separator",
+        "cpu",
+        "temperature",
+        "custom/separator",
+        "memory",
+    ],
+
+    "modules-center": [
+        "clock",
+    ],
+    "modules-right": [
+        "pulseaudio#microphone",
+        "pulseaudio",
+        "custom/separator",
+        "network",
+    ],
+
+    "custom/separator": {
+        "format": "|",
+        "interval": "once",
+        "tooltip": false
+    },
+
+
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": " {:%A, %d %B %H:%M}",
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": false,
+        "on-click": "foot btop"
+    },
+    "memory": {
+        "format": " {used:0.1f}GiB",
+        "on-click": "foot btop",
+    },
+    "temperature": {
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp1_input",
+        "critical-threshold": 80,
+        "format": " {temperatureC}°C",
+        "format-icons": ["󰉬", "", "󰉪"],
+        "on-click": "foot btop",
+    },
+
+    "network": {
+        "max-length": 15,
+        "format-ethernet": "{ifname} 󰊗",
+        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "format-disconnected": "󱛅 ",
+    },
+    "pulseaudio": {
+        "scroll-step": 5, // %, can be a float
+        "format": " {volume}%",
+        "format-muted": "󰅶" , //{format_source}",
+        "on-click": "pavucontrol"
+    },
+
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+        "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
+        "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%",
+        "tooltip-format": "{source_desc} | {source_volume}%"
+    },
+
+    "custom/weather": {
+        "format": "{}°C",
+        "tooltip": true,
+        "interval": 5400,
+        "exec": "wttrbar --nerd --hide-conditions --date-format '%m/%d' --mph --location=Semarang",
+        "return-type": "json"
+    },
+
+    "river/tags": {
+        "hide-vacant": true,
+    },
+
+    "disk": {
+        "interval": 300,
+        "format": "/ {percentage_used}%",
+        "path": "/",
+        "tooltip-format": "{used} used out of {total} on {path} ({percentage_used}%)"
+    },
+
+
+}
