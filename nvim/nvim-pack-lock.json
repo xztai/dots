@@ -1,0 +1,44 @@
+{
+  "plugins": {
+    "base16-nvim": {
+      "rev": "21233d5fd574439ae1e2f5e4bfbc574214f4ab3d",
+      "src": "https://github.com/RRethy/base16-nvim"
+    },
+    "friendly-snippets": {
+      "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
+      "src": "https://github.com/rafamadriz/friendly-snippets"
+    },
+    "mason.nvim": {
+      "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
+      "src": "https://github.com/mason-org/mason.nvim"
+    },
+    "mini.nvim": {
+      "rev": "fdc8b9701616863e44f7a7a0802cfe16bd866539",
+      "src": "https://github.com/nvim-mini/mini.nvim"
+    },
+    "nvim-autopairs": {
+      "rev": "7b9923abad60b903ece7c52940e1321d39eccc79",
+      "src": "https://github.com/windwp/nvim-autopairs"
+    },
+    "nvim-lspconfig": {
+      "rev": "d224a1920728ba129880efc700d4a0180ac4ecbb",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-treesitter": {
+      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "oxocarbon.nvim": {
+      "rev": "cf49e389c22dab56224e43ae16422ddcd5b61b28",
+      "src": "https://github.com/nyoom-engineering/oxocarbon.nvim"
+    },
+    "plenary.nvim": {
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "yazi.nvim": {
+      "rev": "668cd1f1045c4b929b6292bafc084d5c699770e6",
+      "src": "https://github.com/mikavilpas/yazi.nvim"
+    }
+  }
+}
